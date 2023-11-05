@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HotelProject.BusinessLayer.Abstract;
+using HotelProject.EntityLayer.Concrete;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -12,32 +14,45 @@ namespace HotelReservationApp.Controllers
     [ApiController]
     public class StaffController : Controller
     {
+        private readonly IStaffService _staffService;
+
+        public StaffController(IStaffService staffService)
+        {
+            _staffService = staffService;
+        }
+
         [HttpGet]
         public IActionResult StaffList()
         {
-            return Ok();
+            var values = _staffService.TGetList();
+            return Ok(values);
         }
 
         [HttpPost]
-        public IActionResult AddStaff()
+        public IActionResult AddStaff(Staff staff)
         {
+            _staffService.TInsert(staff);
             return Ok();
         }
 
         [HttpDelete]
-        public IActionResult DeleteStaff()
+        public IActionResult DeleteStaff(int id)
         {
+            var values = _staffService.TGetByID(id);
+            _staffService.TDelete(values);
             return Ok();
         }
         [HttpPut]
-        public IActionResult UpdateStaff()
+        public IActionResult UpdateStaff(Staff staff)
         {
+            _staffService.TUpdate(staff);
             return Ok();
         }
         [HttpGet("{id}")]
-        public IActionResult GetStaff()
+        public IActionResult GetStaff(int id)
         {
-            return Ok();
+            var values = _staffService.TGetByID(id); 
+            return Ok(values);
         }
     }
 }
