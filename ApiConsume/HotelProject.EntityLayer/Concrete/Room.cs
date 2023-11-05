@@ -1,8 +1,11 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace HotelProject.EntityLayer.Concrete
 {
 	public class Room
 	{
+		[Key]
 		public int RoomID { get; set; }
 		public string RoomNumber { get; set; }
 		public string RoomCoverImage { get; set; }

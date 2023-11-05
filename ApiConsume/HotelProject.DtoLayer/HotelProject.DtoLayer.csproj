@@ -18,4 +18,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HotelProject.EntityLayer\HotelProject.EntityLayer.csproj" />
+  </ItemGroup>
 </Project>
